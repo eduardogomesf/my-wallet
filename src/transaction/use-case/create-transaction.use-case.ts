@@ -31,7 +31,7 @@ export class CreateTransactionUseCase {
       data.userId,
     );
 
-    if (data.type === 'debit' && userBalance < data.amount) {
+    if (data.type === TransactionType.DEBIT && userBalance < data.amount) {
       return {
         ok: false,
         error: {
@@ -75,7 +75,7 @@ export class CreateTransactionUseCase {
       };
     }
 
-    if (type !== 'credit' && type !== 'debit') {
+    if (type !== TransactionType.CREDIT && type !== TransactionType.DEBIT) {
       return {
         ok: false,
         error: {
