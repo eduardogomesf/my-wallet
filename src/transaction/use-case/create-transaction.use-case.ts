@@ -79,7 +79,7 @@ export class CreateTransactionUseCase {
       return {
         ok: false,
         error: {
-          message: 'Type must be credit or debit',
+          message: 'Type must be CREDIT or DEBIT',
           code: ERROR_CODES.TYPE_MUST_BE_CREDIT_OR_DEBIT,
         },
       };
