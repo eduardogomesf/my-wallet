@@ -1,11 +1,12 @@
 import { TransactionType } from '../../interface';
 
-type CreateNewTransactionRepositoryParams = {
+export type CreateNewTransactionRepositoryParams = {
   userId: string;
   amount: number;
   type: TransactionType;
   date: Date;
   name: string;
+  transactionId: string;
 };
 
 export interface CreateNewTransactionRepository {

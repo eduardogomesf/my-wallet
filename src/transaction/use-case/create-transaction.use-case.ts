@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { v4 as uuid } from 'uuid';
 import { UseCaseResponse } from '../../shared';
 import {
   CreateNewTransactionRepository,
@@ -17,7 +18,9 @@ type CreateTransactionUseCasePayload = {
 @Injectable()
 export class CreateTransactionUseCase {
   constructor(
+    @Inject('GetUserBalanceRepository')
     private readonly getUserBalanceRepository: GetUserBalanceRepository,
+    @Inject('CreateNewTransactionRepository')
     private readonly createNewTransactionRepository: CreateNewTransactionRepository,
   ) {}
 
@@ -50,6 +53,7 @@ export class CreateTransactionUseCase {
       type: data.type,
       userId: data.userId,
       name: data.name,
+      transactionId: uuid(),
     });
 
     return {
