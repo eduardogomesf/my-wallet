@@ -11,6 +11,7 @@ type CreateTransactionUseCasePayload = {
   amount: number;
   userId: string;
   type: TransactionType;
+  name: string;
 };
 
 @Injectable()
@@ -43,11 +44,13 @@ export class CreateTransactionUseCase {
       };
     }
 
-    await this.createNewTransactionRepository.createNewTransaction(
-      data.userId,
-      data.amount,
-      data.type,
-    );
+    await this.createNewTransactionRepository.createNewTransaction({
+      amount: data.amount,
+      date: new Date(),
+      type: data.type,
+      userId: data.userId,
+      name: data.name,
+    });
 
     return {
       ok: true,
@@ -55,7 +58,7 @@ export class CreateTransactionUseCase {
   }
 
   validateParams(data: CreateTransactionUseCasePayload) {
-    const { amount, userId, type } = data;
+    const { amount, userId, type, name } = data;
 
     if (!amount || amount <= 0) {
       return {
@@ -83,6 +86,16 @@ export class CreateTransactionUseCase {
         error: {
           message: 'Type must be CREDIT or DEBIT',
           code: ERROR_CODES.TYPE_MUST_BE_CREDIT_OR_DEBIT,
+        },
+      };
+    }
+
+    if (!name) {
+      return {
+        ok: false,
+        error: {
+          message: 'Name is required',
+          code: ERROR_CODES.NAME_IS_REQUIRED,
         },
       };
     }

@@ -39,6 +39,7 @@ describe('Create Transaction Use Case', () => {
         userId: '',
         amount: 500,
         type: TransactionType.CREDIT,
+        name: 'any-name',
       };
 
       const result = await sut.create(params);
@@ -54,6 +55,7 @@ describe('Create Transaction Use Case', () => {
         userId: 'any-id',
         amount: 0,
         type: TransactionType.CREDIT,
+        name: 'any-name',
       };
 
       const result = await sut.create(params);
@@ -69,6 +71,7 @@ describe('Create Transaction Use Case', () => {
         userId: 'any-id',
         amount: 60,
         type: 'any-type' as TransactionType,
+        name: 'any-name',
       };
 
       const result = await sut.create(params);
@@ -78,6 +81,22 @@ describe('Create Transaction Use Case', () => {
       expect(result.error.code).toBe(ERROR_CODES.TYPE_MUST_BE_CREDIT_OR_DEBIT);
       expect(result.error.message).toBe('Type must be CREDIT or DEBIT');
     });
+
+    it('should return nok if no name is provided', async () => {
+      const params = {
+        userId: 'any-id',
+        amount: 500,
+        type: TransactionType.CREDIT,
+        name: '',
+      };
+
+      const result = await sut.create(params);
+
+      expect(result.ok).toBe(false);
+      expect(result.data).toBeUndefined();
+      expect(result.error.code).toBe(ERROR_CODES.NAME_IS_REQUIRED);
+      expect(result.error.message).toBe('Name is required');
+    });
   });
 
   it('should return nok if user balance is insufficient', async () => {
@@ -85,6 +104,7 @@ describe('Create Transaction Use Case', () => {
       userId: 'any-id',
       amount: 600,
       type: TransactionType.DEBIT,
+      name: 'any-name',
     };
 
     const result = await sut.create(params);
@@ -100,6 +120,7 @@ describe('Create Transaction Use Case', () => {
       userId: 'any-id',
       amount: 60,
       type: TransactionType.CREDIT,
+      name: 'any-name',
     };
 
     const result = await sut.create(params);

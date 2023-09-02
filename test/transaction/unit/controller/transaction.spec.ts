@@ -30,6 +30,7 @@ describe('Transaction Controller', () => {
       userId: 'any-id',
       amount: 500,
       type: TransactionType.CREDIT,
+      name: 'any-name',
     });
 
     await expect(promise).rejects.toThrowError(
@@ -45,6 +46,7 @@ describe('Transaction Controller', () => {
       userId: 'any-id',
       amount: 500,
       type: TransactionType.CREDIT,
+      name: 'any-name',
     });
 
     expect(result).toBeNull();
