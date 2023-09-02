@@ -1,4 +1,4 @@
-import { TransactionType } from '../../shared';
+import { TransactionType } from '../interface';
 
 export type CreateTransactionDto = {
   amount: number;

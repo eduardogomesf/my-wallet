@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { ERROR_CODES, TransactionType, UseCaseResponse } from '../../shared';
+import { UseCaseResponse } from '../../shared';
 import {
   CreateNewTransactionRepository,
   GetUserBalanceRepository,
 } from './protocol';
+import { ERROR_CODES } from '../error';
+import { TransactionType } from '../interface';
 
 type CreateTransactionUseCasePayload = {
   amount: number;

@@ -1,4 +1,5 @@
-import { ERROR_CODES, TransactionType } from '../../../../src/shared';
+import { ERROR_CODES } from '../../../../src/transaction/error';
+import { TransactionType } from '../../../../src/transaction/interface';
 import { CreateTransactionUseCase } from '../../../../src/transaction/use-case';
 import {
   CreateNewTransactionRepository,

@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
-import { TransactionType } from '../../../../src/shared';
 import { TransactionController } from '../../../../src/transaction/controller';
 import { CreateTransactionUseCase } from '../../../../src/transaction/use-case';
+import { TransactionType } from '../../../../src/transaction/interface';
 
 const makeCreateTransactionUseCase = (): CreateTransactionUseCase => {
   return {
