@@ -27,17 +27,29 @@ export class CreateTransactionUseCase {
   async create(
     data: CreateTransactionUseCasePayload,
   ): Promise<UseCaseResponse<null>> {
-    const validation = this.validateParams(data);
+    const transaction = {
+      amount: data.amount,
+      date: new Date(),
+      type: data.type,
+      userId: data.userId,
+      name: data.name,
+      transactionId: uuid(),
+    };
+
+    const validation = this.validateParams(transaction);
 
     if (!validation.ok) {
       return validation;
     }
 
     const userBalance = await this.getUserBalanceRepository.getBalance(
-      data.userId,
+      transaction.userId,
     );
 
-    if (data.type === TransactionType.DEBIT && userBalance < data.amount) {
+    if (
+      transaction.type === TransactionType.DEBIT &&
+      userBalance < transaction.amount
+    ) {
       return {
         ok: false,
         error: {
@@ -48,12 +60,7 @@ export class CreateTransactionUseCase {
     }
 
     await this.createNewTransactionRepository.createNewTransaction({
-      amount: data.amount,
-      date: new Date(),
-      type: data.type,
-      userId: data.userId,
-      name: data.name,
-      transactionId: uuid(),
+      ...transaction,
     });
 
     return {
