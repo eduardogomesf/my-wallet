@@ -39,6 +39,18 @@ Create a .env file in the root of the project and copy the variables from the .e
 npm run up # This will build the Docker image and start the containers in detached mode using the docker-compose configuration.
 ```
 
+5. **Accessing the API Documentation**:
+You can access the API documentation with Swagger UI. Copy the url bellow and paste in the browser
+```
+http://localhost:8080/docs
+```
+
+6. **Visualizing data**:
+You can access the EventStoreDB UI in the URL bellow:
+```
+http://localhost:2113
+```
+
 x. **Stopping the Docker Containers**:
 If you want to stop the Docker containers:
 ```
