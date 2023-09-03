@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: My Wallet API
+  version: 1.0.0
+paths:
+  /transactions:
+    post:
+      summary: Create a transaction
+      operationId: createTransaction
+      tags:
+        - Transactions
+      requestBody:
+        description: Transaction data to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransactionDto'
+      responses:
+        '201':
+          description: Transaction successfully created
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+    get:
+      summary: Get user balance
+      operationId: getBalance
+      tags:
+        - Transactions
+      parameters:
+        - name: userId
+          in: query
+          required: true
+          description: User ID to retrieve the balance for
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  balance:
+                    type: number
+                    example: 10
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+
+components:
+  schemas:
+    CreateTransactionDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          example: 500
+        userId:
+          type: string
+          example: "48cbb007-252d-4246-a342-caded55a105c"
+        type:
+          $ref: '#/components/schemas/TransactionType'
+        name:
+          type: string
+          example: "Expense"
+
+    TransactionType:
+      type: string
+      enum:
+        - DEBIT
+        - CREDIT
+
+    BadRequestResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "User id is required"
+        code:
+          type: string
+          example: "user_id_is_required"
