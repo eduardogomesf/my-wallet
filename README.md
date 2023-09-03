@@ -30,12 +30,15 @@ git clone https://github.com/eduardogomesf/my-wallet.git
 cd my-wallet
 ```
 
-3. **Build and Start the Docker Containers**:
+3. **Setup envs**:
+Create a .env file in the root of the project and copy the variables from the .env.example file
+
+4. **Build and Start the Docker Containers**:
 ```
 npm run up # This will build the Docker image and start the containers in detached mode using the docker-compose configuration.
 ```
 
-4. **Stopping the Docker Containers**:
+x. **Stopping the Docker Containers**:
 If you want to stop the Docker containers:
 ```
 npm run down
