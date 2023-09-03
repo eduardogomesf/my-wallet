@@ -21,21 +21,21 @@ My Wallet: Digital Wallet with Event Sourcing Integration
 ![Alt text](./docs/image.png)
 
 ## Running the Application with Docker
-1. Install Docker:
+1. **Install Docker**:
 If you don't have Docker installed, download it from Docker official website and follow the installation instructions.
 
-2. Clone the Repository:
+2. **Clone the Repository**:
 ```
 git clone https://github.com/eduardogomesf/my-wallet.git
 cd my-wallet
 ```
 
-3. Build and Start the Docker Containers:
+3. **Build and Start the Docker Containers**:
 ```
 npm run up # This will build the Docker image and start the containers in detached mode using the docker-compose configuration.
 ```
 
-4. Stopping the Docker Containers:
+4. **Stopping the Docker Containers**:
 If you want to stop the Docker containers:
 ```
 npm run down
