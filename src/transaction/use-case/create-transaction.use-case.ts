@@ -3,10 +3,12 @@ import { v4 as uuid } from 'uuid';
 import { UseCaseResponse } from '../../shared';
 import {
   CreateNewTransactionRepository,
+  EventDispatcher,
   GetUserBalanceRepository,
 } from './protocol';
 import { ERROR_CODES } from '../error';
 import { TransactionType } from '../interface';
+import { EVENTS } from '../event';
 
 type CreateTransactionUseCasePayload = {
   amount: number;
@@ -22,6 +24,8 @@ export class CreateTransactionUseCase {
     private readonly getUserBalanceRepository: GetUserBalanceRepository,
     @Inject('CreateNewTransactionRepository')
     private readonly createNewTransactionRepository: CreateNewTransactionRepository,
+    @Inject('EventDispatcher')
+    private readonly eventDispatcher: EventDispatcher,
   ) {}
 
   async create(
@@ -62,6 +66,11 @@ export class CreateTransactionUseCase {
     await this.createNewTransactionRepository.createNewTransaction({
       ...transaction,
     });
+
+    this.eventDispatcher.dispatch(
+      EVENTS.USER_TRANSACTION_CREATED,
+      transaction.userId,
+    );
 
     return {
       ok: true,

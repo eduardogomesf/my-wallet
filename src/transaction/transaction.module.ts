@@ -4,6 +4,7 @@ import { TransactionController } from './controller/transaction.controller';
 import { ESGetUserBalanceRepossitory } from './repository/event-store/get-user-balance.repository';
 import { ESCreateNewTransactionRepository } from './repository/event-store/create-new-transaction.repository';
 import { RedisGetUserBalanceRepository } from './repository/redis';
+import { BuiltInEventDispatcher } from './event';
 
 @Module({
   imports: [],
@@ -18,6 +19,10 @@ import { RedisGetUserBalanceRepository } from './repository/redis';
     {
       provide: 'CreateNewTransactionRepository',
       useClass: ESCreateNewTransactionRepository,
+    },
+    {
+      provide: 'EventDispatcher',
+      useClass: BuiltInEventDispatcher,
     },
   ],
 })
