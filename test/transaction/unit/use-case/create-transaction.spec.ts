@@ -3,6 +3,7 @@ import { TransactionType } from '../../../../src/transaction/interface';
 import { CreateTransactionUseCase } from '../../../../src/transaction/use-case';
 import {
   CreateNewTransactionRepository,
+  EventDispatcher,
   GetUserBalanceRepository,
 } from '../../../../src/transaction/use-case/protocol';
 
@@ -19,17 +20,26 @@ const makeCreateNewTransactionRepository =
     };
   };
 
+const makeEventDispatcher = (): EventDispatcher => {
+  return {
+    dispatch: jest.fn().mockResolvedValue(null),
+  };
+};
+
 describe('Create Transaction Use Case', () => {
   let sut: CreateTransactionUseCase;
   let getUserBalanceRepository: GetUserBalanceRepository;
   let createNewTransactionRepository: CreateNewTransactionRepository;
+  let eventDispatcher: EventDispatcher;
 
   beforeEach(() => {
     getUserBalanceRepository = makeGetUserBalanceRepository();
     createNewTransactionRepository = makeCreateNewTransactionRepository();
+    eventDispatcher = makeEventDispatcher();
     sut = new CreateTransactionUseCase(
       getUserBalanceRepository,
       createNewTransactionRepository,
+      eventDispatcher,
     );
   });
 
