@@ -7,8 +7,8 @@ My Wallet: Digital Wallet with Event Sourcing Integration
 [NestJS](https://nestjs.com/)  
 [TypeScript](https://www.typescriptlang.org/)  
 [Event Sourcing](https://www.eventstore.com/event-sourcing#:~:text=Event%20Sourcing%20is%20an%20architectural,effective%20architecture%20for%20their%20needs.)  
-[EventStoreDB](https://www.eventstore.com/)  
-[Redis (Not yet)](https://redis.io/)  
+[Event Store DB](https://www.eventstore.com/)  
+[Redis (Not implemented yet)](https://redis.io/)  
 [Jest](https://jestjs.io/pt-BR/)  
 [Docker](https://www.docker.com/)  
 [Docker Compose](https://docs.docker.com/compose/)
@@ -18,7 +18,7 @@ My Wallet: Digital Wallet with Event Sourcing Integration
 
 
 ## System Design
-![Alt text](./docs/image.png)
+![Alt text](./docs/images/system-design.png)
 
 ## Running the Application with Docker
 1. **Install Docker**:
